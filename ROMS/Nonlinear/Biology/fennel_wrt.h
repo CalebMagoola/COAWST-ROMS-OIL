@@ -74,6 +74,12 @@
      &                      ncid = ncid)
       IF (FoundError(exit_flag, NoError, __LINE__,                      &
      &               __FILE__)) RETURN
+     
+      CALL netcdf_put_fvar (ng, model, ncname, 'K_PO4',                 &
+     &                      K_PO4(ng), (/0/), (/0/),                    &
+     &                      ncid = ncid)
+      IF (FoundError(exit_flag, NoError, __LINE__,                      &
+     &               __FILE__)) RETURN
 
       CALL netcdf_put_fvar (ng, model, ncname, 'K_Phy',                 &
      &                      K_Phy(ng), (/0/), (/0/),                    &
@@ -95,6 +101,12 @@
 
       CALL netcdf_put_fvar (ng, model, ncname, 'PhyCN',                 &
      &                      PhyCN(ng), (/0/), (/0/),                    &
+     &                      ncid = ncid)
+      IF (FoundError(exit_flag, NoError, __LINE__,                      &
+     &               __FILE__)) RETURN
+     
+      CALL netcdf_put_fvar (ng, model, ncname, 'R_P2N',                 &
+     &                      R_P2N(ng), (/0/), (/0/),                    &
      &                      ncid = ncid)
       IF (FoundError(exit_flag, NoError, __LINE__,                      &
      &               __FILE__)) RETURN
@@ -195,6 +207,18 @@
       IF (FoundError(exit_flag, NoError, __LINE__,                      &
      &               __FILE__)) RETURN
 
+      CALL netcdf_put_fvar (ng, model, ncname, 'RDeRRN',                &
+     &                      RDeRRN(ng), (/0/), (/0/),                   &
+     &                      ncid = ncid)
+      IF (FoundError(exit_flag, NoError, __LINE__,                      &
+     &               __FILE__)) RETURN
+     
+      CALL netcdf_put_fvar (ng, model, ncname, 'RDeRRC',                &
+     &                      RDeRRC(ng), (/0/), (/0/),                   &
+     &                      ncid = ncid)
+      IF (FoundError(exit_flag, NoError, __LINE__,                      &
+     &               __FILE__)) RETURN
+     
       CALL netcdf_put_fvar (ng, model, ncname, 'wPhy',                  &
      &                      wPhy(ng), (/0/), (/0/),                     &
      &                      ncid = ncid)

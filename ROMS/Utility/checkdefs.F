@@ -718,6 +718,14 @@
       Coptions(is:is+12)=' BIO_UMAINE,'
       ibiology=ibiology+1
 #endif
+! J.C updates new ROMS
+#if defined PO4 && defined BIO_FENNEL
+      IF (Master) WRITE (stdout,20) 'PO4',                              &
+     &   'Add PO4 dynamics.'
+      is=LEN_TRIM(Coptions)+1
+      Coptions(is:is+5)=' PO4,'
+#endif
+! J.C end new ROMS
 #ifdef BODYFORCE
 !
       IF (Master) WRITE (stdout,20) 'BODYFORCE',                        &
@@ -2308,6 +2316,14 @@
       is=LEN_TRIM(Coptions)+1
       Coptions(is:is+12)=' PJ_GRADPQ4,'
 #endif
+! J.C updates new ROMS
+#if defined RIVER_DON && defined BIO_FENNEL
+      IF (Master) WRITE (stdout,20) 'RIVER_DON',                           &
+     &   'Add river detritus equation.'
+      is=LEN_TRIM(Coptions)+1
+      Coptions(is:is+5)=' RIVER_DON,'
+#endif
+! J.C end new ROMS
 #ifdef POSITIVE_ZERO
 !
       IF (Master) WRITE (stdout,20) 'POSITIVE_ZERO',                    &
@@ -2520,6 +2536,20 @@
       Coptions(is:is+12)=' REP_MATRIX,'
       idriver=idriver+1
 #endif
+! J.C change
+#if defined RIVER_BIOLOGY && defined BIOLOGY
+      IF (Master) WRITE (stdout,20) 'RIVER_BIOLOGY',                    &
+     &   'River biology point sources.'
+      is=LEN_TRIM(Coptions)+1
+      Coptions(is:is+15)=' RIVER_BIOLOGY,'
+#endif
+#if defined RIVER_SEDIMENT && defined SEDIMENT
+      IF (Master) WRITE (stdout,20) 'RIVER_SEDIMENT',                   &
+     &   'River sediment point sources.'
+      is=LEN_TRIM(Coptions)+1
+      Coptions(is:is+16)=' RIVER_SEDIMENT,'
+#endif
+! J.C end
 #if defined LMD_MIXING
 # ifdef RI_HORAVG
 !
@@ -3046,6 +3076,12 @@
       is=LEN_TRIM(Coptions)+1
       Coptions(is:is+12)=' TLM_DRIVER,'
       idriver=idriver+1
+#endif
+#ifdef THREE_GHOST
+      IF (Master) WRITE (stdout,20) 'THREE_GHOST',                      &
+     &   'Using three Ghost Points in halo regions.'
+      is=LEN_TRIM(Coptions)+1
+      Coptions(is:is+15)=' THREE_GHOST,'
 #endif
 #if defined GLS_MIXING && defined TKE_WAVEDISS
 !
