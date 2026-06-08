@@ -52,13 +52,14 @@
 #
  
 ifdef USE_NETCDF4
-        NF_CONFIG ?= nf-config
-    NETCDF_INCDIR ?= $(shell $(NF_CONFIG) --prefix)/include
-             LIBS := $(shell $(NF_CONFIG) --flibs) -lnetcdf
+      NF_CONFIG ?= nf-config
+      NC_CONFIG ?= nc-config
+   NETCDF_INCDIR ?= $(shell $(NF_CONFIG) --prefix)/include
+            LIBS := $(shell $(NF_CONFIG) --flibs) $(shell $(NC_CONFIG) --libs) -L/apps/spack-managed/gcc-11.3.1/libjpeg-9e-zwukncawcjsgffdlstdtorcj3vz6xlui/lib -Wl,-rpath,/apps/spack-managed/gcc-11.3.1/libjpeg-9e-zwukncawcjsgffdlstdtorcj3vz6xlui/lib -ljpeg
 else
-    NETCDF_INCDIR ?= /usr/local/include
-    NETCDF_LIBDIR ?= /usr/local/lib
-             LIBS := -L$(NETCDF_LIBDIR) -lnetcdf -lnetcdff
+   NETCDF_INCDIR ?= /usr/local/include
+   NETCDF_LIBDIR ?= /usr/local/lib
+            LIBS := -L$(NETCDF_LIBDIR) -lnetcdf -lnetcdff
 endif
 
 ifdef USE_ARPACK
@@ -75,7 +76,7 @@ ifdef USE_MPI
  ifdef USE_MPIF90
                FC := mpiifort #mpif90
  else
-             LIBS += -lfmpi-pgi -lmpi-pgi
+             LIBS += -lmpifort -lmpi
  endif
 endif
 
