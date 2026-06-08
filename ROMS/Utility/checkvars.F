@@ -124,7 +124,7 @@
           get_var(idUvel)=.TRUE.
           get_var(idVvel)=.TRUE.
 #  if !defined OFFLINE || (defined OFFLINE && defined ATCLIMATOLOGY)
-! KMT don't look for salt/temp if running offline
+! KMT dont look for salt/temp if running offline, unless ATCLIMATOLOGY
           DO itrc=1,NAT
             get_var(idTvar(itrc))=.TRUE.
           END DO
@@ -144,10 +144,10 @@
         get_var(idUvel)=.TRUE.
         get_var(idVvel)=.TRUE.
 #  if !defined OFFLINE || (defined OFFLINE && defined ATCLIMATOLOGY)
-! KMT don't look for salt/temp if running offline
-        DO itrc=1,NAT
-          get_var(idTvar(itrc))=.TRUE.
-        END DO
+! KMT dont look for salt/temp if running offline, unless ATCLIMATOLOGY
+          DO itrc=1,NAT
+            get_var(idTvar(itrc))=.TRUE.
+          END DO
 #  endif
 # endif
 #endif
