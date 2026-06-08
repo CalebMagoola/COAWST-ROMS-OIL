@@ -61,7 +61,7 @@ endif
 #  the .h extension. For example, the upwelling application includes the
 #  "upwelling.h" header file.
 
-ROMS_APPLICATION ?= SHOREFACE
+ROMS_APPLICATION ?= OIL_TEST
 
 #  If application header files is not located in "ROMS/Include",
 #  provide an alternate directory FULL PATH.
@@ -100,7 +100,7 @@ MY_CPP_FLAGS ?=
 #  If parallel applications, use at most one of these definitions
 #  (leave both definitions blank in serial applications):
 
-     USE_MPI ?=
+     USE_MPI ?= on
   USE_OpenMP ?=
 
 #  If distributed-memory, turn on compilation via the script "mpif90".
@@ -120,7 +120,11 @@ MY_CPP_FLAGS ?=
 #  If applicable, link with NetCDF-4 library. Notice that the NetCDF-4
 #  library needs both the HDF5 and MPI libraries.
 
- USE_NETCDF4 ?=
+#ifdef USE_NETCDF4
+#  NC_CONFIG := nc-config
+#  NF_CONFIG := nf-config
+#  LIBS := $(shell $(NF_CONFIG) --flibs) $(shell $(NC_CONFIG) --libs)
+#endif
 
 #--------------------------------------------------------------------------
 #  We are going to include a file with all the settings that depend on
@@ -145,8 +149,8 @@ MY_CPP_FLAGS ?=
 #  NetCDF and so on.
 #--------------------------------------------------------------------------
 
-        FORT ?= pgi
-
+        FORT ?= ifort
+ USE_NETCDF4 ?= on
 #--------------------------------------------------------------------------
 #  Set directory for executable.
 #--------------------------------------------------------------------------
