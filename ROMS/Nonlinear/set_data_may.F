@@ -2443,13 +2443,15 @@
           DO i=Istr-1,Iend+1
 #  if defined AKTCLIMATOLOGY || defined AKXCLIMATOLOGY
             MIXING(ng)%Akt(i,j,k,1) = CLIMA(ng)%AKtclm(i,j,k)
-            ! KMT save subsequent time step
-            MIXING(ng)%gls(i,j,k,nnew(ng)) = Akttemp(i,j,k)
+! KMT save subsequent time step
+!            MIXING(ng)%gls(i,j,k,nnew(ng)) = Akttemp(i,j,k)
+! J.C Remove for LMD_mixing
 #  endif
 #  if defined AKSCLIMATOLOGY || defined AKXCLIMATOLOGY
             MIXING(ng)%Akt(i,j,k,2) = CLIMA(ng)%AKsclm(i,j,k)
-            ! KMT save subsequent time step
-            MIXING(ng)%gls(i,j,k,3) = Akstemp(i,j,k)
+! KMT save subsequent time step
+!            MIXING(ng)%gls(i,j,k,3) = Akstemp(i,j,k)
+! J.C Remove for LMD_mixing
 #  endif
 #  if defined AKVCLIMATOLOGY || defined AKXCLIMATOLOGY
             MIXING(ng)%Akv(i,j,k) = CLIMA(ng)%AKvclm(i,j,k)
@@ -2621,4 +2623,3 @@
       RETURN
       END SUBROUTINE set_data
 #endif
-

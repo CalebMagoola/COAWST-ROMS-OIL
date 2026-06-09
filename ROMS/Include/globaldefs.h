@@ -988,9 +988,9 @@
 
 
 /*
- Define Mixing climatology
- Added by DJ
- */
+** Define Mixing climatology
+** Added by DJ
+*/
 
 #if defined TKECLIMATOLOGY && defined GLSCLIMATOLOGY
 # define MIXCLIMATOLOGY
@@ -999,5 +999,15 @@
 #if defined AKTCLIMATOLOGY && defined AKVCLIMATOLOGY && \
     defined AKSCLIMATOLOGY
 # define AKXCLIMATOLOGY
+#endif
+
+
+/*
+** Define Active Tracers Climatology for Offline Biology
+** Added by J.C
+*/
+
+#if defined OFFLINE && defined OFFLINE_BIOLOGY
+# define ATCLIMATOLOGY
 #endif
 

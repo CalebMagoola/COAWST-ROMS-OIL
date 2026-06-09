@@ -19,10 +19,15 @@
 /*
 **  Model state biological tracers.
 */
+
               CASE ('idTvar(iNO3_)')
                 idTvar(iNO3_)=varid
               CASE ('idTvar(iNH4_)')
                 idTvar(iNH4_)=varid
+#ifdef PO4
+            CASE ('idTvar(iPO4_)')
+              idTvar(iPO4_)=varid
+#endif
               CASE ('idTvar(iPhyt)')
                 idTvar(iPhyt)=varid
               CASE ('idTvar(iZoop)')
@@ -47,6 +52,14 @@
               CASE ('idTvar(iOxyg)')
                 idTvar(iOxyg)=varid
 # endif
+#ifdef RIVER_DON
+            CASE ('idTvar(iRDeN)')
+              idTvar(iRDeN)=varid
+# ifdef CARBON
+            CASE ('idTvar(iRDeC)')
+              idTvar(iRDeC)=varid
+# endif
+#endif
 
 /*
 **  Adjoint sensitivity state biological tracers.
@@ -59,6 +72,10 @@
                 idTads(iNO3_)=varid
               CASE ('idTads(iNH4_)')
                 idTads(iNH4_)=varid
+# ifdef PO4
+              CASE ('idTads(iPO4_)')
+                idTads(iPO4_)=varid
+# endif
               CASE ('idTads(iPhyt)')
                 idTads(iPhyt)=varid
               CASE ('idTads(iZoop)')
@@ -82,6 +99,14 @@
 # ifdef OXYGEN
               CASE ('idTads(iOxyg)')
                 idTads(iOxyg)=varid
+# endif
+# ifdef RIVER_DON
+            CASE ('idTads(iRDeN)')
+              idTads(iRDeN)=varid
+#  ifdef CARBON
+            CASE ('idTads(iRDeC)')
+              idTads(iRDeC)=varid
+#  endif
 # endif
 #endif
 
@@ -107,6 +132,16 @@
               CASE ('idTbry(inorth,iNH4_)')
                 idTbry(inorth,iNH4_)=varid
 
+#ifdef PO4
+            CASE ('idTbry(iwest,iPO4_)')
+              idTbry(iwest,iPO4_)=varid
+            CASE ('idTbry(ieast,iPO4_)')
+              idTbry(ieast,iPO4_)=varid
+            CASE ('idTbry(isouth,iPO4_)')
+              idTbry(isouth,iPO4_)=varid
+            CASE ('idTbry(inorth,iPO4_)')
+              idTbry(inorth,iPO4_)=varid
+#endif
               CASE ('idTbry(iwest,iPhyt)')
                 idTbry(iwest,iPhyt)=varid
               CASE ('idTbry(ieast,iPhyt)')
@@ -199,7 +234,26 @@
               CASE ('idTbry(inorth,iOxyg)')
                 idTbry(inorth,iOxyg)=varid
 #endif
-
+#ifdef RIVER_DON
+            CASE ('idTbry(iwest,iRDeN)')
+              idTbry(iwest,iRDeN)=varid
+            CASE ('idTbry(ieast,iRDeN)')
+              idTbry(ieast,iRDeN)=varid
+            CASE ('idTbry(isouth,iRDeN)')
+              idTbry(isouth,iRDeN)=varid
+            CASE ('idTbry(inorth,iRDeN)')
+              idTbry(inorth,iRDeN)=varid
+# ifdef CARBON
+            CASE ('idTbry(iwest,iRDeC)')
+              idTbry(iwest,iRDeC)=varid
+            CASE ('idTbry(ieast,iRDeC)')
+              idTbry(ieast,iRDeC)=varid
+            CASE ('idTbry(isouth,iRDeC)')
+              idTbry(isouth,iRDeC)=varid
+            CASE ('idTbry(inorth,iRDeC)')
+              idTbry(inorth,iRDeC)=varid
+# endif
+#endif
 
 /*
 **  Biological tracers point Source/Sinks (river runoff).
@@ -209,6 +263,10 @@
                 idRtrc(iNO3_)=varid
               CASE ('idRtrc(iNH4_)')
                 idRtrc(iNH4_)=varid
+#ifdef PO4
+              CASE ('idRtrc(iPO4_)')
+                idRtrc(iPO4_)=varid
+#endif
               CASE ('idRtrc(iPhyt)')
                 idRtrc(iPhyt)=varid
               CASE ('idRtrc(iZoop)')
@@ -233,6 +291,14 @@
               CASE ('idRtrc(iOxyg)')
                 idRtrc(iOxyg)=varid
 #endif
+#ifdef RIVER_DON
+            CASE ('idRtrc(iRDeN)')
+              idRtrc(iRDeN)=varid
+# ifdef CARBON
+            CASE ('idRtrc(iRDeC)')
+              idRtrc(iRDeC)=varid
+# endif
+#endif
 
 
 #ifdef DIAGNOSTICS_BIO
@@ -240,6 +306,7 @@
 /*
 **  Biological tracers term diagnostics.
 */
+
 # ifdef DENITRIFICATION
               CASE ('iDbio2(iDNIT)')
                 iDbio2(iDNIT)=varid
@@ -258,4 +325,6 @@
                 iDbio3(iPPro)=varid
               CASE ('iDbio3(iNO3u)')
                 iDbio3(iNO3u)=varid
+              CASE ('iDbio3(iNifx)')
+                iDbio3(iNifx)=varid              
 #endif
